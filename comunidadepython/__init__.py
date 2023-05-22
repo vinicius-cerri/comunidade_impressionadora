@@ -3,11 +3,18 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+import os
 
 # Criar app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '9f72e64cd6c97d5b1aa1b2d10dc1c690'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
+
+if os.getenv('DATABASE_URL'):
+    # Rodando no servidor online
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+else:
+    # Rodando no computador
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)

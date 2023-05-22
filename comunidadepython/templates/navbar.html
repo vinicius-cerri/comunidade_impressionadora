@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <!-- container: coloca os elementos mais centralizados, um pouco afastado das laterais da página -->
+  <div class="container-fluid container">
+    <!-- Botão Comunidade Impressionadora -->
+    <!-- navbar-brand: Deixa o botão maior -->
+    <a class="navbar-brand" href="{{ url_for('homepage') }}">Comunidade Impressionadora</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- ul: lista de itens -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <!-- Botão Início -->
+          <a class="nav-link" aria-current="page" href="{{ url_for('homepage') }}">Início</a>
+        </li>
+        <li class="nav-item">
+          <!-- Botão Usuários -->
+          <a class="nav-link" href="{{ url_for('usuarios') }}">Usuários</a>
+        </li>
+        <li class="nav-item">
+          <!-- Botão Contato -->
+          <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+        </li>
+      </ul>
+      <ul class="d-flex navbar-nav" >
+        {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <!-- Botão Criar Post -->
+            <a class="nav-link" href="{{ url_for('criar_post') }}">Criar Post</a>
+          </li>
+          <li class="nav-item">
+            <!-- Botão Perfil -->
+            <a class="nav-link" href="{{ url_for('perfil') }}">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <!-- Botão Sair -->
+            <a class="nav-link" href="{{ url_for('sair') }}">Sair</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <!-- Botão Login -->
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <!-- Botão Criar Conta -->
+            <a class="nav-link" href="{{ url_for('login') }}">Criar Conta</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

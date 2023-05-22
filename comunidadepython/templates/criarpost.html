@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="" class="border p-4 mt-2">
+                    {{ form.csrf_token }} <!-- Campo escondido, garantir a segurança do formulário -->
+                    <legend>Criar Post</legend> <!-- Legenda do Formulário de Criar Post -->
+                    <fieldset> <!-- Separa os Campos do Botão, para ficar mais organizado -->
+                        <div class="form-group"> <!-- Separar os Campos, para ficar cada um em uma linha -->
+                            {{ form.titulo.label(class="form-control-label") }}
+                            <!-- Validação do Campo Título -->
+                            {% if form.titulo.errors %}
+                                {{ form.titulo(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.titulo.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form.titulo(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group"> <!-- Separar os Campos, para ficar cada um em uma linha -->
+                            {{ form.corpo.label(class="form-control-label") }}
+                            <!-- Validação do Campo Corpo do Post -->
+                            {% if form.corpo.errors %}
+                                {{ form.corpo(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.corpo.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form.corpo(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    <!-- Botão Editar Perfil -->
+                    {{ form.botao_submit(class="btn btn-primary mt-2") }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
